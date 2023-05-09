@@ -1,0 +1,39 @@
+version: "3"
+services:
+  db:
+    image: mysql:8.0.33
+    # platform: linux/x86_64 # for m1 mac
+    volumes:
+      - test_rails_20230510_db_volume:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: root
+    ports:
+      - "4306:3306"
+  api:
+    build:
+      context: ./backend
+      dockerfile: ../.docker/ruby/Dockerfile
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3001 -b '0.0.0.0'"
+    volumes:
+      - ./backend:/test_rails_20230510-rails:delegated
+      - bundle:/bundle:cached
+    tmpfs:
+      - /tmp
+    tty: true
+    stdin_open: true
+    environment:
+      RAILS_ENV: development
+      DATABASE_HOST: db
+      DATABASE_PORT: 3035
+      DATABASE_USER: mysql
+      DATABASE_PASSWORD: password
+      TZ: Asia/Tokyo
+    ports:
+      - "3001:3001"
+    depends_on:
+      - db
+volumes:
+  test_rails_20230510_db_volume:
+  bundle:
+  redis:
