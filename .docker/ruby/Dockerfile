@@ -7,9 +7,9 @@ RUN apt-get update -qq && \
                        graphviz \
                        imagemagick \
                        libpq-dev &&\
-    mkdir /test_rails_20230510-rails
+    mkdir /rails_nextjs_test_20230510-rails
 
-ENV APP_ROOT /test_rails_20230510-rails
+ENV APP_ROOT /rails_nextjs_test_20230510-rails
 WORKDIR $APP_ROOT
 
 ADD ./Gemfile $APP_ROOT/Gemfile

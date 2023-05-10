@@ -20,14 +20,14 @@ default: &default
 
 development:
   <<: *default
-  database: test_rails_20230510_development
+  database: rails_nextjs_test_20230510_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: <%= ENV['MYSQL_DATABASE'] || 'test_rails_20230510_test' %>
+  database: <%= ENV['MYSQL_DATABASE'] || 'rails_nextjs_test_20230510_test' %>
   username: <%= ENV['MYSQL_USER'] || 'root'%>
   password: <%= ENV['MYSQL_PASSWORD'] || 'password' %>
   host: <%= ENV['MYSQL_HOST'] || 'db' %>

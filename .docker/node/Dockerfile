@@ -1,6 +1,6 @@
 FROM node:20.1.0-alpine
 
-WORKDIR /test_rails_20230510
+WORKDIR /rails_nextjs_test_20230510
 
 COPY package.json ./
 COPY yarn.lock ./

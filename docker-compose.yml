@@ -5,7 +5,7 @@ services:
       context: ./frontend
       dockerfile: ../.docker/node/Dockerfile
     volumes:
-      - ./frontend:/test_rails_20230510:delegated
+      - ./frontend:/rails_nextjs_test_20230510:delegated
     ports:
       - "3000:3000"
     command: yarn dev
@@ -13,7 +13,7 @@ services:
     image: mysql:8.0.33
     # platform: linux/x86_64 # for m1 mac
     volumes:
-      - test_rails_20230510_db_volume:/var/lib/mysql
+      - rails_nextjs_test_20230510_db_volume:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: root
@@ -25,7 +25,7 @@ services:
       dockerfile: ../.docker/ruby/Dockerfile
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3001 -b '0.0.0.0'"
     volumes:
-      - ./backend:/test_rails_20230510-rails:delegated
+      - ./backend:/rails_nextjs_test_20230510-rails:delegated
       - bundle:/bundle:cached
     tmpfs:
       - /tmp
@@ -43,6 +43,6 @@ services:
     depends_on:
       - db
 volumes:
-  test_rails_20230510_db_volume:
+  rails_nextjs_test_20230510_db_volume:
   bundle:
   redis:
