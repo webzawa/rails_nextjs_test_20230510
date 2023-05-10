@@ -1,5 +1,14 @@
 version: "3"
 services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ../.docker/node/Dockerfile
+    volumes:
+      - ./frontend:/test_rails_20230510:delegated
+    ports:
+      - "3000:3000"
+    command: yarn dev
   db:
     image: mysql:8.0.33
     # platform: linux/x86_64 # for m1 mac
